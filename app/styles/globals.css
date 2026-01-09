@@ -1,0 +1,105 @@
+:root {
+  /* Colors */
+  --bg-primary: #050505;
+  --text-primary: #ededed;
+  --text-muted: rgba(237, 237, 237, 0.6);
+  --accent: #6ea8ff;
+
+  /* Typography - Body */
+  --font-body: "Sharpgroteskbook 23", Arial, sans-serif;
+  --font-size-body: 16px;
+  --line-height-body: 26px;
+
+  /* Typography - Headlines */
+  --font-heading-primary: "atelier", serif;
+  --font-heading-secondary: "Bomstad", sans-serif;
+
+  /* Spacing */
+  --container-padding: clamp(2rem, 5vw, 6rem);
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --font-size-body: 17px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  line-height: 1;
+}
+
+h1 {
+  font-family: var(--font-heading-primary);
+  font-size: clamp(42px, 8vw, 120px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: var(--font-heading-secondary);
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.05;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+section {
+  padding: 10rem var(--container-padding);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Utils */
+.muted {
+  color: var(--text-muted);
+}
+.accent {
+  color: var(--accent);
+}
+
+/* GSAP Scroll Context */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -1;
+}
