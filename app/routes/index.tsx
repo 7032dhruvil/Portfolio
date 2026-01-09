@@ -2,13 +2,24 @@ import { createFileRoute } from '@tanstack/react-router'
 import { lazy, Suspense, useState, useEffect } from 'react'
 import { useLoaderData } from '@tanstack/react-router'
 import GhostCursor from '../components/motion/GhostCursor'
-import TextReveal from '../components/motion/TextReveal'
 import HorizontalScroll from '../components/motion/HorizontalScroll'
 import LaserFlow from '../components/motion/LaserFlow'
 import ImageTrail from '../components/motion/ImageTrail'
 import LightningBackground from '../components/motion/LightningBackground'
 import ElectricBorder from '../components/motion/ElectricBorder'
 import { getProjectStats } from '../utils/greet'
+
+// React Bits Components
+import SplitText from '../components/ui/SplitText'
+import ShinyText from '../components/ui/ShinyText'
+import BlurText from '../components/ui/BlurText'
+import SpotlightCard from '../components/ui/SpotlightCard'
+import CardStack from '../components/ui/CardStack'
+import StickerPeel from '../components/ui/StickerPeel'
+import GradualBlur from '../components/ui/GradualBlur'
+import Ballpit from '../components/ui/Ballpit'
+import LetterGlitch from '../components/ui/LetterGlitch'
+import Magnet from '../components/ui/Magnet'
 
 import project1 from '../assets/project1.png'
 import project2 from '../assets/project2.png'
@@ -44,7 +55,7 @@ function PortfolioPage() {
       <GhostCursor />
       
       {/* HERO SECTION */}
-      <section className="hero" aria-label="Introduction">
+      <section className="hero" aria-label="Introduction" style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
         {isMobile === false && (
           <Suspense fallback={null}>
             <HeroScene />
@@ -52,34 +63,37 @@ function PortfolioPage() {
         )}
         
         <div className="hero-content" style={{ position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
-          <div className="muted" style={{ fontSize: '0.8rem', marginBottom: '1rem' }}>
-            [ SYSTEM: {stats.status} // UNIT: {stats.engineer} ]
+          <div className="muted" style={{ fontSize: '0.8rem', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.3em' }}>
+            <ShinyText text={`[ SYSTEM: ${stats.status} // UNIT: ${stats.engineer} ]`} speed={3} />
           </div>
-          <h1 className="editorial-title">
-            Precision <br />
-            <span className="accent">Engineering</span> <br />
-            Digital Art
+          <h1 className="editorial-title" style={{ fontSize: 'clamp(3rem, 10vw, 8rem)', fontWeight: 800, lineHeight: 0.9 }}>
+            <SplitText text="Precision" /><br />
+            <span className="accent"><SplitText text="Engineering" delay={0.2} /></span><br />
+            <SplitText text="Digital Art" delay={0.4} />
           </h1>
-          <p className="muted" style={{ marginTop: '2rem', maxWidth: '400px', fontSize: '1rem' }}>
-            A cinematic experience built with TanStack Start, GSAP, and Three.js. 
-            Focused on technical excellence and editorial aesthetics.
-          </p>
+          <div style={{ marginTop: '3rem', maxWidth: '500px', margin: '3rem auto 0' }}>
+            <BlurText text="A cinematic experience built with TanStack Start, GSAP, and Three.js. Focused on technical excellence and editorial aesthetics." delay={0.6} className="muted" />
+          </div>
         </div>
         
-        <div className="scroll-hint muted" style={{ position: 'absolute', bottom: '2rem', left: 'var(--container-padding)', fontSize: '0.8rem' }}>
-          [ SCROLL TO EXPLORE ]
+        <div className="scroll-hint muted" style={{ position: 'absolute', bottom: '2rem', fontSize: '0.7rem', letterSpacing: '0.2em' }}>
+          <Magnet>[ SCROLL TO EXPLORE ]</Magnet>
         </div>
       </section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="about" aria-label="About Me">
+      <section id="about" className="about" aria-label="About Me" style={{ padding: '10rem var(--container-padding)', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="about-content" style={{ maxWidth: '800px' }}>
-          <h2 className="muted" style={{ marginBottom: '1.5rem', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>// About</h2>
-          <TextReveal>
-            Designing interfaces that feel intentional. 
-            I bridge the gap between creative code and performance-first architecture. 
-            Every pixel serves a purpose; every motion tells a story.
-          </TextReveal>
+          <h2 className="muted" style={{ marginBottom: '2rem', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+            <LetterGlitch text="// About" />
+          </h2>
+          <div style={{ fontSize: 'clamp(24px, 4vw, 48px)', fontWeight: 500, lineHeight: 1.1 }}>
+            <GradualBlur>
+              Designing interfaces that feel intentional. 
+              I bridge the gap between creative code and performance-first architecture. 
+              Every pixel serves a purpose; every motion tells a story.
+            </GradualBlur>
+          </div>
         </div>
       </section>
 
@@ -93,30 +107,62 @@ function PortfolioPage() {
       </section>
 
       {/* PROJECTS SECTION */}
-      <section id="projects" className="projects" style={{ minHeight: 'auto' }} aria-label="Selected Projects">
-        <h2 className="muted" style={{ marginBottom: '4rem', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>// Selected Work</h2>
+      <section id="projects" className="projects" style={{ minHeight: 'auto', padding: '10rem var(--container-padding)' }} aria-label="Selected Projects">
+        <h2 className="muted" style={{ marginBottom: '5rem', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <LetterGlitch text="// Selected Work" />
+        </h2>
         <div className="projects-grid" style={{ 
           display: 'grid', 
           gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
-          gap: '2rem' 
+          gap: '4rem' 
         }}>
-          <ImageTrail src={project1} alt="Editorial Design Project 1" />
-          <ImageTrail src={project2} alt="Interactive Web Project 2" />
-          <ImageTrail src={project1} alt="Editorial Design Project 3" />
-          <ImageTrail src={project2} alt="Interactive Web Project 4" />
+          <SpotlightCard>
+            <ImageTrail src={project1} alt="Editorial Design Project 1" />
+            <h3 style={{ marginTop: '1.5rem', fontSize: '1.5rem' }}>Ethereal Motion</h3>
+            <p className="muted" style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>Complex GSAP choreography and editorial layouts.</p>
+          </SpotlightCard>
+          <SpotlightCard>
+            <ImageTrail src={project2} alt="Interactive Web Project 2" />
+            <h3 style={{ marginTop: '1.5rem', fontSize: '1.5rem' }}>Neural Interface</h3>
+            <p className="muted" style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>AI-driven interactivity with React Three Fiber.</p>
+          </SpotlightCard>
         </div>
       </section>
 
       {/* PLAYGROUND SECTION */}
-      <section id="playground" className="playground" style={{ position: 'relative' }}>
-        <LightningBackground />
+      <section id="playground" className="playground" style={{ position: 'relative', overflow: 'hidden', padding: '10rem var(--container-padding)', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', opacity: 0.3 }}>
+          <Ballpit />
+        </div>
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <h2 className="muted" style={{ marginBottom: '1.5rem', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>// Playground</h2>
-          <h1 style={{ opacity: 0.1, fontSize: '15vw' }}>EXPERIMENT</h1>
-          <p className="muted" style={{ maxWidth: '400px' }}>
-            Checking the boundaries of what is possible with WebGL and React. 
-            Ambient aesthetics meet raw performance.
-          </p>
+          <h2 className="muted" style={{ marginBottom: '2rem', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+            <LetterGlitch text="// Playground" />
+          </h2>
+          <div className="stack-wrapper" style={{ display: 'flex', justifyContent: 'space-between', gap: '4rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ maxWidth: '400px' }}>
+              <h1 style={{ fontSize: '4rem', marginBottom: '2rem' }}>Raw <span className="accent">Experiments</span></h1>
+              <BlurText text="Checking the boundaries of what is possible with WebGL and React. Ambient aesthetics meet raw performance." className="muted" />
+              <div style={{ marginTop: '3rem' }}>
+                <StickerPeel overlay="SECRET">
+                  <div style={{ border: '1px solid var(--accent)', padding: '1rem 2rem', letterSpacing: '0.1em' }}>REVEAL CORE CODE</div>
+                </StickerPeel>
+              </div>
+            </div>
+            <CardStack items={[
+              <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <h4 className="accent" style={{ marginBottom: '1rem' }}>ARCHITECTURE</h4>
+                <p className="muted">Scalable, high-performance systems built for the modern web.</p>
+              </div>,
+              <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <h4 className="accent" style={{ marginBottom: '1rem' }}>MOTION</h4>
+                <p className="muted">Fluid, cinematic transitions that prioritize user intent.</p>
+              </div>,
+              <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <h4 className="accent" style={{ marginBottom: '1rem' }}>WEBGL</h4>
+                <p className="muted">Immersive 3D environments rendered in real-time.</p>
+              </div>
+            ]} />
+          </div>
         </div>
       </section>
 
